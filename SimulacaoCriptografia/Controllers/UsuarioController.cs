@@ -37,5 +37,19 @@ namespace SimulacaoCriptografia.Controllers
             UsuarioModel user = await _userRepo.AdicionarUsuario(um);
             return Ok(user);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<UsuarioModel>> Atualizar([FromBody] UsuarioModel um, int id)
+        {
+            um.Id = id;
+            UsuarioModel user = await _userRepo.AtualizarDadosDoUsuario(um, id);
+            return Ok(user);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<UsuarioModel>> Apagar(int id)
+        {
+            return Ok(await _userRepo.DeletarUsuario(id));
+        }
     }
 }
