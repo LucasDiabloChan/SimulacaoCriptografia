@@ -54,6 +54,12 @@
                 }
             }
         }
-    }
 
+        public static string[] GetCipherText()
+        {
+            StreamReader sr = new StreamReader("./tokenModel.txt");
+
+            return sr.ReadLine().Split("#");
+        }
+    }
 }
