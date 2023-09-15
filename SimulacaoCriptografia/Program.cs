@@ -19,16 +19,12 @@ namespace SimulacaoCriptografia
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Busca a string de conexão e a chave
-            var encryptString = builder.Configuration.GetConnectionString("DataBase");
-            var key = "12345";
-
-            var decryptString = EncryptionHelper.Decrypt(encryptString, key);
-
-
+            var keys[] = builder.Configuration.GetConnectionString("DataBase");
             builder.Services.AddEntityFrameworkSqlServer()
                 .AddDbContext<SistemaDeTarefasBDContext>(
-                    options => options.UseSqlServer(decryptString)
+                    options => options.UseSqlServer(
+                        EncryptionHelper.Decrypt(key[1], key[0])
+                    )
                 );
 
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
