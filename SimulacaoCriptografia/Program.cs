@@ -19,7 +19,7 @@ namespace SimulacaoCriptografia
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var keys[] = builder.Configuration.GetConnectionString("DataBase");
+            var keys[] = builder.GetCipherText();
             builder.Services.AddEntityFrameworkSqlServer()
                 .AddDbContext<SistemaDeTarefasBDContext>(
                     options => options.UseSqlServer(
